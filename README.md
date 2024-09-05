@@ -3,4 +3,4 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/a74cb5cb3eae7319a5d8/maintainability)](https://codeclimate.com/github/sshelyagovsky/java-project-99/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a74cb5cb3eae7319a5d8/test_coverage)](https://codeclimate.com/github/sshelyagovsky/java-project-99/test_coverage)
 
-Task Manager – система управления задачами, подобная http://www.redmine.org/. Она позволяет ставить задачи, назначать исполнителей и менять их статусы. Для работы с системой требуется регистрация и аутентификация.
+Task Manager вЂ“ СЃРёСЃС‚РµРјР° СѓРїСЂР°РІР»РµРЅРёСЏ Р·Р°РґР°С‡Р°РјРё, РїРѕРґРѕР±РЅР°СЏ http://www.redmine.org/. РћРЅР° РїРѕР·РІРѕР»СЏРµС‚ СЃС‚Р°РІРёС‚СЊ Р·Р°РґР°С‡Рё, РЅР°Р·РЅР°С‡Р°С‚СЊ РёСЃРїРѕР»РЅРёС‚РµР»РµР№ Рё РјРµРЅСЏС‚СЊ РёС… СЃС‚Р°С‚СѓСЃС‹. Р”Р»СЏ СЂР°Р±РѕС‚С‹ СЃ СЃРёСЃС‚РµРјРѕР№ С‚СЂРµР±СѓРµС‚СЃСЏ СЂРµРіРёСЃС‚СЂР°С†РёСЏ Рё Р°СѓС‚РµРЅС‚РёС„РёРєР°С†РёСЏ.
