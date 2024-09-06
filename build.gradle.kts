@@ -7,6 +7,7 @@ plugins {
 	jacoco
 	id("org.springframework.boot") version "3.3.3"
 	id("io.spring.dependency-management") version "1.1.6"
+	id("io.freefair.lombok") version "8.6"
 }
 
 group = "hexlet.code"
@@ -21,12 +22,18 @@ java {
 repositories {
 	mavenCentral()
 }
-
+/*Spring*/
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+}
+/*DB*/
+dependencies {
+	runtimeOnly("com.h2database:h2:2.2.224")
+	implementation("org.postgresql:postgresql:42.7.2")
 }
 
 tasks.withType<Test> {
