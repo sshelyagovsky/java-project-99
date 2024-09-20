@@ -22,15 +22,50 @@ java {
 repositories {
 	mavenCentral()
 }
-/*Spring*/
+
+/* Spring */
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+	//implementation("org.springframework.boot:spring-boot-starter-security")
 }
-/*DB*/
+
+/* Spring test */
+dependencies {
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.security:spring-security-test")
+}
+
+/* Instancio */
+dependencies {
+	implementation("org.instancio:instancio-junit:3.6.0")
+}
+
+/* DataFaker*/
+dependencies {
+	implementation("net.datafaker:datafaker:2.0.2")
+}
+
+/* Json Assertj */
+dependencies {
+	implementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
+}
+
+/* Spring MapStruc t*/
+dependencies {
+	implementation("org.mapstruct:mapstruct:1.5.5.Final")
+	annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
+}
+
+/* Jackson */
+dependencies {
+	implementation("org.openapitools:jackson-databind-nullable:0.2.6")
+
+}
+
+/* DB */
 dependencies {
 	runtimeOnly("com.h2database:h2:2.2.224")
 	implementation("org.postgresql:postgresql:42.7.2")
@@ -51,5 +86,5 @@ tasks.test {
 		showStandardStreams = true
 	}
 }
-
+/* Jococo */
 tasks.jacocoTestReport { reports { xml.required.set(true) } }
