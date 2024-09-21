@@ -14,6 +14,7 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Mapper (
     uses = {JsonNullableMapper.class, ReferenceMapper.class},
@@ -24,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class UserMapper {
 
     @Autowired
-    private EncodersConfig encodersConfig;
+    private PasswordEncoder passwordEncoder;
 
     public abstract UserDTO map(User model);
 
@@ -39,7 +40,7 @@ public abstract class UserMapper {
     @BeforeMapping
     public void encryptPassword(UserCreateDTO data) {
         var password = data.getPassword();
-        data.setPassword(encodersConfig.pbkdf2Hashing(password));
+        data.setPassword(passwordEncoder.encode(password));
     }
 
 }

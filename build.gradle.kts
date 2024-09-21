@@ -14,9 +14,7 @@ group = "hexlet.code"
 version = "0.0.1-SNAPSHOT"
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
+		sourceCompatibility = JavaVersion.VERSION_21
 }
 
 repositories {
@@ -29,8 +27,15 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
-	//implementation("org.springframework.boot:spring-boot-starter-security")
 }
+
+/* Spring Security */
+dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+	testImplementation("org.springframework.security:spring-security-test")
+}
+
 
 /* Spring test */
 dependencies {
@@ -43,7 +48,7 @@ dependencies {
 	implementation("org.instancio:instancio-junit:3.6.0")
 }
 
-/* DataFaker*/
+/* DataFaker */
 dependencies {
 	implementation("net.datafaker:datafaker:2.0.2")
 }
@@ -53,7 +58,7 @@ dependencies {
 	implementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
 }
 
-/* Spring MapStruc t*/
+/* Spring MapStruct */
 dependencies {
 	implementation("org.mapstruct:mapstruct:1.5.5.Final")
 	annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")

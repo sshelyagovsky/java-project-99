@@ -8,3 +8,10 @@ spring:
     console:
       enabled: true
       path: /h2
+#logging:
+#  level:
+#    root: info
+#    web: debug
+#    org:
+#      springframework:
+#        security: debug
