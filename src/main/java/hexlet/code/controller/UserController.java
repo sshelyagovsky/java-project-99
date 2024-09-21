@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController()
+@RestController
 @RequestMapping(path = "/api")
 public class UserController {
 
@@ -41,7 +41,6 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public UserDTO show(@PathVariable Long id) {
         return userService.findById(id);
-
     }
 
     @PostMapping(path = "/users")
