@@ -1,6 +1,5 @@
 package hexlet.code.service;
 
-import hexlet.code.config.EncodersConfig;
 import hexlet.code.dto.user.UserCreateDTO;
 import hexlet.code.dto.user.UserDTO;
 import hexlet.code.dto.user.UserUpdateDTO;
