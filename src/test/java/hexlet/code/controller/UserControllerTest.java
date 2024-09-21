@@ -71,7 +71,7 @@ public class UserControllerTest {
 
         var body = response.getContentAsString();
 
-        List<UserDTO> users = om.readValue(body, new TypeReference<>() {});
+        List<UserDTO> users = om.readValue(body, new TypeReference<>() { });
         var actual = users.stream().map(userMapper::map).toList();
 
         var expected = userRepository.findAll();
@@ -84,8 +84,8 @@ public class UserControllerTest {
 
         userRepository.save(testUser);
 
-        var response = mockMvc.perform(get("/api/users/{id}"
-                        , testUser.getId()).with(jwt()))
+        var response = mockMvc.perform(get("/api/users/{id}",
+                        testUser.getId()).with(jwt()))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();
