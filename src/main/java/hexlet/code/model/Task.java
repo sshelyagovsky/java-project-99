@@ -36,12 +36,12 @@ public class Task implements BaseEntity {
 
     private String description;
 
-    @NotNull
+/*    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     private TaskStatus taskStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private User assignee;
+    private User assignee;*/
 
     @CreatedDate
     private LocalDateTime createdAt;

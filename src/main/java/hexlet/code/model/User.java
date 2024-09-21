@@ -61,8 +61,8 @@ public class User implements BaseEntity, UserDetails {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL)
-    private List<Task> tasks;
+//    @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL)
+//    private List<Task> tasks;
 
     @Override
     public String getPassword() {
