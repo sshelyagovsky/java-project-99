@@ -46,5 +46,5 @@ public class TaskStatus implements BaseEntity {
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "taskStatus", cascade = CascadeType.ALL)
-    private List<TaskStatus> taskStatuses = new ArrayList<>();
+    private List<Task> tasks;
 }
