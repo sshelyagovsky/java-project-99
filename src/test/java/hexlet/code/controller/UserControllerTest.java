@@ -21,6 +21,7 @@ import java.util.List;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -63,15 +64,14 @@ public class UserControllerTest {
 
         userRepository.save(testUser);
 
-        var response = mockMvc.perform(get("/api/users"))
+        var response = mockMvc.perform(get("/api/users").with(jwt()))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();
 
         var body = response.getContentAsString();
 
-        List<UserDTO> users = om.readValue(body, new TypeReference<>() {
-        });
+        List<UserDTO> users = om.readValue(body, new TypeReference<>() {});
         var actual = users.stream().map(userMapper::map).toList();
 
         var expected = userRepository.findAll();
@@ -84,7 +84,8 @@ public class UserControllerTest {
 
         userRepository.save(testUser);
 
-        var response = mockMvc.perform(get("/api/users/{id}", testUser.getId()))
+        var response = mockMvc.perform(get("/api/users/{id}"
+                        , testUser.getId()).with(jwt()))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();
@@ -110,7 +111,7 @@ public class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(om.writeValueAsString(userData));
 
-        mockMvc.perform(request)
+        mockMvc.perform(request.with(jwt()))
                 .andExpect(status().isCreated());
 
         var user = userRepository.findByEmail(userData.getEmail()).get();
@@ -134,7 +135,7 @@ public class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(om.writeValueAsString(dto));
 
-        mockMvc.perform(request)
+        mockMvc.perform(request.with(jwt()))
                 .andExpect(status().isOk());
 
         var user = userRepository.findByEmail(dto.getEmail()).get();
@@ -149,7 +150,7 @@ public class UserControllerTest {
     public void testDelete() throws Exception {
         userRepository.save(testUser);
 
-        var request = delete("/api/users/{id}", testUser.getId());
+        var request = delete("/api/users/{id}", testUser.getId()).with(jwt());
 
         mockMvc.perform(request)
                 .andExpect(status().isNoContent());

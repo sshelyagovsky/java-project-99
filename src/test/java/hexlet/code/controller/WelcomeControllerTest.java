@@ -11,6 +11,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.nio.charset.StandardCharsets;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -36,7 +37,7 @@ public class WelcomeControllerTest {
 
         String expected = "Welcome to Spring";
 
-        mockMvc.perform(get("/welcome"))
+        mockMvc.perform(get("/welcome").with(jwt()))
                 .andExpect(status().isOk())
                 .andExpect(content().string(expected));
     }
