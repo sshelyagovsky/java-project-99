@@ -4,6 +4,9 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+#    properties:
+#      hibernate:
+#        format_sql: true
   output:
     ansi:
       enabled: always
@@ -12,3 +15,12 @@ spring:
 rsa:
   private-key: classpath:certs/private.pem
   public-key: classpath:certs/public.pem
+#logging:
+#  level:
+#    root: debug
+#    sql: debug
+#    org:
+#      hibernate:
+#        orm:
+#          jdbc:
+#            bind=TRACE:

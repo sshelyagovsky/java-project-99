@@ -72,6 +72,7 @@ dependencies {
 
 /* DB */
 dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	runtimeOnly("com.h2database:h2:2.2.224")
 	implementation("org.postgresql:postgresql:42.7.2")
 }
