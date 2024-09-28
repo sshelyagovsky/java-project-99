@@ -23,4 +23,3 @@ rsa:
 #      hibernate:
 #        orm:
 #          jdbc:
-#            bind=TRACE:

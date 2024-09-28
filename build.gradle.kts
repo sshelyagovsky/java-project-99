@@ -36,32 +36,21 @@ dependencies {
 	testImplementation("org.springframework.security:spring-security-test")
 }
 
-
 /* Spring test */
 dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
 }
 
-/* Instancio */
-dependencies {
-	implementation("org.instancio:instancio-junit:3.6.0")
-}
-
-/* DataFaker */
-dependencies {
-	implementation("net.datafaker:datafaker:2.0.2")
-}
-
-/* Json Assertj */
-dependencies {
-	implementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
-}
-
 /* Spring MapStruct */
 dependencies {
 	implementation("org.mapstruct:mapstruct:1.5.5.Final")
 	annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
+}
+
+/* Spring OpenApi Swagger */
+dependencies {
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 }
 
 /* Jackson */
@@ -75,6 +64,21 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	runtimeOnly("com.h2database:h2:2.2.224")
 	implementation("org.postgresql:postgresql:42.7.2")
+}
+
+/* Json Assertj */
+dependencies {
+	implementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
+}
+
+/* Instancio */
+dependencies {
+	implementation("org.instancio:instancio-junit:3.6.0")
+}
+
+/* DataFaker */
+dependencies {
+	implementation("net.datafaker:datafaker:2.0.2")
 }
 
 tasks.withType<Test> {

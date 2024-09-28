@@ -1,9 +1,12 @@
 package hexlet.code.component;
 
+import hexlet.code.dto.label.LabelCreateDTO;
 import hexlet.code.dto.taskstatus.TaskStatusCreateDTO;
 import hexlet.code.dto.user.UserCreateDTO;
+import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.TaskStatusRepository;
 import hexlet.code.repository.UserRepository;
+import hexlet.code.service.LabelService;
 import hexlet.code.service.TaskStatusService;
 import hexlet.code.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Component
 public class DataInitializer implements ApplicationRunner {
@@ -27,6 +31,11 @@ public class DataInitializer implements ApplicationRunner {
 
     @Autowired
     private TaskStatusService taskStatusService;
+
+    @Autowired
+    private LabelRepository labelRepository;
+    @Autowired
+    private LabelService labelService;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -56,6 +65,16 @@ public class DataInitializer implements ApplicationRunner {
                taskStatus.setName(status.getKey());
                taskStatus.setSlug(status.getValue());
                taskStatusService.create(taskStatus);
+            }
+        }
+
+        var labels = List.of("feature", "bug");
+
+        for (var label : labels) {
+            if (labelRepository.findByName(label).isEmpty()) {
+                var labelNew = new LabelCreateDTO();
+                labelNew.setName(label);
+                labelService.create(labelNew);
             }
         }
     }

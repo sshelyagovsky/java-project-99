@@ -1,10 +1,9 @@
 package hexlet.code.controller;
 
-
-import hexlet.code.dto.taskstatus.TaskStatusCreateDTO;
-import hexlet.code.dto.taskstatus.TaskStatusDTO;
-import hexlet.code.dto.taskstatus.TaskStatusUpdateDTO;
-import hexlet.code.service.TaskStatusService;
+import hexlet.code.dto.label.LabelCreateDTO;
+import hexlet.code.dto.label.LabelDTO;
+import hexlet.code.dto.label.LabelUpdateDTO;
+import hexlet.code.service.LabelService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,42 +24,43 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/api")
 @SecurityRequirement(name = "bearerAuth")
-public class TaskStatusController {
+public class LabelController {
 
     @Autowired
-    private TaskStatusService taskStatusService;
+    private LabelService labelService;
 
-    @GetMapping(path = "/task_statuses")
+    @GetMapping(path = "/labels")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<TaskStatusDTO>> index() {
-        var taskStatuses = taskStatusService.findAll();
+    public ResponseEntity<List<LabelDTO>> index() {
+        var labels = labelService.findAll();
 
         return ResponseEntity.ok()
-                .header("X-Total-Count", String.valueOf(taskStatuses.size()))
-                .body(taskStatuses);
-    }
-    @GetMapping(path = "/task_statuses/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public TaskStatusDTO show(@PathVariable Long id) {
-        return taskStatusService.findById(id);
+                .header("X-Total-Count", String.valueOf(labels.size()))
+                .body(labels);
     }
 
-    @PostMapping(path = "/task_statuses")
+    @GetMapping(path = "/labels/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public LabelDTO show(@PathVariable Long id) {
+        return labelService.findById(id);
+    }
+
+    @PostMapping(path = "/labels")
     @ResponseStatus(HttpStatus.CREATED)
-    public TaskStatusDTO create(@Valid @RequestBody TaskStatusCreateDTO taskStatusData) {
-        return taskStatusService.create(taskStatusData);
+    public LabelDTO create(@Valid @RequestBody LabelCreateDTO labelData) {
+        return labelService.create(labelData);
     }
 
-    @PutMapping(path = "/task_statuses/{id}")
+    @PutMapping(path = "/labels/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TaskStatusDTO update(@Valid @RequestBody TaskStatusUpdateDTO taskStatusData,
-                                @PathVariable Long id) {
-        return taskStatusService.update(taskStatusData, id);
+    public LabelDTO update(@Valid @RequestBody LabelUpdateDTO labelData, @PathVariable Long id) {
+        return labelService.update(labelData, id);
     }
 
-    @DeleteMapping(path = "/task_statuses/{id}")
+    @DeleteMapping(path = "/label/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
-        taskStatusService.delete(id);
+        labelService.delete(id);
     }
+
 }

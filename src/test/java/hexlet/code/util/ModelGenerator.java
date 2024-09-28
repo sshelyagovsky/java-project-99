@@ -1,8 +1,10 @@
 package hexlet.code.util;
 
+import hexlet.code.model.Label;
 import hexlet.code.model.Task;
 import hexlet.code.model.TaskStatus;
 import hexlet.code.model.User;
+import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.TaskRepository;
 import hexlet.code.repository.TaskStatusRepository;
 import hexlet.code.repository.UserRepository;
@@ -16,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 
 @Getter
 @Component
@@ -27,6 +30,8 @@ public class ModelGenerator {
 
     private Model<Task> taskModel;
 
+    private Model<Label> labelModel;
+
     @Autowired
     private TaskRepository taskRepository;
 
@@ -37,9 +42,12 @@ public class ModelGenerator {
     private UserRepository userRepository;
 
     @Autowired
+    private LabelRepository labelRepository;
+
+    @Autowired
     private Faker faker;
 
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
     @PostConstruct
     private void init() {
@@ -67,6 +75,14 @@ public class ModelGenerator {
                 .supply(Select.field(Task::getName), () -> faker.lorem().word())
                 .supply(Select.field(Task::getIndex), () -> faker.number().randomDigit())
                 .supply(Select.field(Task::getDescription), () -> faker.lorem().word() + faker.lorem().word())
+                .supply(Select.field(Task::getLabels), () -> new HashSet<Label>())
+                .toModel();
+
+        labelModel = Instancio.of(Label.class)
+                .ignore(Select.field(Label::getId))
+                .ignore(Select.field(Label::getCreatedAt))
+                .supply(Select.field(Label::getName), () -> faker.lorem().word() + faker.random().nextInt())
+                .supply(Select.field(Label::getTasks), () -> new HashSet<Task>())
                 .toModel();
     }
 
@@ -80,6 +96,11 @@ public class ModelGenerator {
         var user = Instancio.of(userModel).create();
         userRepository.save(user);
         task.setAssignee(user);
+
+        var label = Instancio.of(labelModel).create();
+        labelRepository.save(label);
+        task.getLabels().add(label);
+        label.getTasks().add(task);
 
         return task;
     }
