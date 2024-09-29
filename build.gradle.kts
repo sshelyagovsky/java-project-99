@@ -82,13 +82,16 @@ dependencies {
 	implementation("net.datafaker:datafaker:2.0.2")
 }
 
+tasks.sentryBundleSourcesJava {
+	enabled = System.getenv("SENTRY_AUTH_TOKEN") != null
+}
+
 sentry {
 	includeSourceContext = true
 	org = "home-lrq"
 	projectName = "task-manager"
 	authToken = System.getenv("SENTRY_AUTH_TOKEN")
 }
-
 
 tasks.withType<Test> {
 	useJUnitPlatform()
