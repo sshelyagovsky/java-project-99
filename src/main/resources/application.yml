@@ -15,6 +15,14 @@ spring:
 rsa:
   private-key: classpath:certs/private.pem
   public-key: classpath:certs/public.pem
+
+sentry:
+  dsn: https://14a3d78314ca5d81774e02b3cf338ae8@o4508036910874624.ingest.de.sentry.io/4508036913234000
+  # Set traces_sample_rate to 1.0 to capture 100%
+  # of transactions for tracing.
+  # We recommend adjusting this value in production.
+  tracesSampleRate: 1.0
+  debug: true
 #logging:
 #  level:
 #    root: debug
