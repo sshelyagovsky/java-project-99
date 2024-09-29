@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -54,6 +55,7 @@ public class TaskControllerTest {
 
     @Test
     public void testIndex() throws Exception {
+
         taskRepository.save(task);
 
         var response = mockMvc.perform(get("/api/tasks").with(jwt()))
@@ -70,7 +72,46 @@ public class TaskControllerTest {
     }
 
     @Test
+    public void testIndexFilter() throws Exception {
+
+        taskRepository.save(task);
+
+        var titleCont = task.getName();
+        var assigneeId = task.getAssignee().getId();
+        var status = task.getTaskStatus().getSlug();
+        var labelId = task.getLabels().stream().iterator().next().getId();
+
+        var response = mockMvc.perform(get("/api/tasks" + "?"
+                        + "titleCont=" + titleCont
+                        + "&assigneeId=" + assigneeId
+                        + "&status=" + status
+                        + "&labelId=" + labelId)
+                        .with(jwt()))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse();
+
+        var body = response.getContentAsString();
+        System.out.println("body -->" + body);
+        var expected = new HashMap<>();
+
+        expected.put("id", task.getId());
+        expected.put("taskLabelIds", Set.of(labelId));
+        expected.put("index", task.getIndex());
+        expected.put("createdAt", task.getCreatedAt().format(ModelGenerator.FORMATTER));
+        expected.put("status", task.getTaskStatus().getSlug());
+        expected.put("assignee_id", task.getAssignee().getId());
+        expected.put("title", task.getName());
+        expected.put("content", task.getDescription());
+
+        assertThatJson(body)
+                .isArray()
+                .contains(om.writeValueAsString(expected));
+    }
+
+    @Test
     public void testShow() throws Exception {
+
         taskRepository.save(task);
 
         var response = mockMvc.perform(get("/api/tasks/{id}",
@@ -93,6 +134,7 @@ public class TaskControllerTest {
 
     @Test
     public void testCreate() throws Exception {
+
         var taskData = modelGenerator.generateTask();
 
         HashMap<Object, Object> taskRequestData = new HashMap<>();

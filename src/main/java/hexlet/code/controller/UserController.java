@@ -5,6 +5,7 @@ import hexlet.code.dto.user.UserDTO;
 import hexlet.code.dto.user.UserUpdateDTO;
 import hexlet.code.service.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/api")
 @SecurityRequirement(name = "bearerAuth")
+@Tag(name = "users-controller")
 public class UserController {
 
     @Autowired
