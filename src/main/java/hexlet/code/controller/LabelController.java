@@ -59,7 +59,7 @@ public class LabelController {
         return labelService.update(labelData, id);
     }
 
-    @DeleteMapping(path = "/label/{id}")
+    @DeleteMapping(path = "/labels/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         labelService.delete(id);
