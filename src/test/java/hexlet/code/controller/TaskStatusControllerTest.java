@@ -49,6 +49,7 @@ public class TaskStatusControllerTest {
 
     private TaskStatus taskStatus;
 
+
     @BeforeEach
     public void setUp() {
         taskStatus = Instancio.of(modelGenerator.getTaskStatusModel())

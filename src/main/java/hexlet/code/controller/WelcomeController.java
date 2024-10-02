@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SecurityRequirement(name = "bearerAuth")
 @Hidden
 public class WelcomeController {
+
     @GetMapping(path = "/welcome")
     public String welcome() {
         return "Welcome to Spring";

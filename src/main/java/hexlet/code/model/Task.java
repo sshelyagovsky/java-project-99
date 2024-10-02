@@ -1,5 +1,6 @@
 package hexlet.code.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
@@ -31,13 +32,17 @@ public class Task implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Long id;
 
     @NotBlank
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "index")
     private int index;
 
+    @Column(name = "description")
     private String description;
 
     @NotNull
@@ -51,5 +56,6 @@ public class Task implements BaseEntity {
     private Set<Label> labels = new HashSet<>();
 
     @CreatedDate
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 }

@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 @Configuration
 public class JacksonConfig {
+
     @Bean
     Jackson2ObjectMapperBuilder objectMapperBuilder() {
         var builder = new Jackson2ObjectMapperBuilder();

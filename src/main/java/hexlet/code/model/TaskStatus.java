@@ -31,17 +31,19 @@ public class TaskStatus implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Long id;
 
     @NotBlank
-    @Column(unique = true)
+    @Column(name = "name", unique = true)
     private String name;
 
     @NotBlank
-    @Column(unique = true)
+    @Column(name = "slug", unique = true)
     private String slug;
 
     @CreatedDate
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "taskStatus", cascade = CascadeType.MERGE)

@@ -19,11 +19,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class WelcomeControllerTest {
+
     @Autowired
     private WebApplicationContext wac;
 
     @Autowired
     private MockMvc mockMvc;
+
 
     @BeforeEach
     public void setUp() {

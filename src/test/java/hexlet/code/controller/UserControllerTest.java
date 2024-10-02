@@ -48,6 +48,7 @@ public class UserControllerTest {
 
     private User testUser;
 
+
     @BeforeEach
     public void setUp() {
         testUser = Instancio.of(modelGenerator.getUserModel())
@@ -127,11 +128,13 @@ public class UserControllerTest {
         dto.setEmail("s.shelyagovsky@gmail.com");
         dto.setFirstName("funny_test");
 
+        var tokenTestUser = jwt().jwt(builder -> builder.subject(testUser.getEmail()));
+
         var request = put("/api/users/" + testUser.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(om.writeValueAsString(dto));
 
-        mockMvc.perform(request.with(jwt()))
+        mockMvc.perform(request.with(tokenTestUser))
                 .andExpect(status().isOk());
 
         var user = userRepository.findByEmail(dto.getEmail()).get();
@@ -146,7 +149,9 @@ public class UserControllerTest {
     public void testDelete() throws Exception {
         userRepository.save(testUser);
 
-        var request = delete("/api/users/{id}", testUser.getId()).with(jwt());
+        var tokenTestUser = jwt().jwt(builder -> builder.subject(testUser.getEmail()));
+
+        var request = delete("/api/users/{id}", testUser.getId()).with(tokenTestUser);
 
         mockMvc.perform(request)
                 .andExpect(status().isNoContent());

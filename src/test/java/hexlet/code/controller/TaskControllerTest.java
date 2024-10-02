@@ -48,6 +48,7 @@ public class TaskControllerTest {
 
     private Task task;
 
+
     @BeforeEach
     public void setUp() {
         task = modelGenerator.generateTask();

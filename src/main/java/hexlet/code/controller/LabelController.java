@@ -7,7 +7,7 @@ import hexlet.code.service.LabelService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,10 +26,10 @@ import java.util.List;
 @RequestMapping(path = "/api")
 @SecurityRequirement(name = "bearerAuth")
 @Tag(name = "labels-controller")
+@RequiredArgsConstructor
 public class LabelController {
 
-    @Autowired
-    private LabelService labelService;
+    private final LabelService labelService;
 
     @GetMapping(path = "/labels")
     @ResponseStatus(HttpStatus.OK)
@@ -64,5 +64,4 @@ public class LabelController {
     public void delete(@PathVariable Long id) {
         labelService.delete(id);
     }
-
 }

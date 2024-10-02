@@ -38,26 +38,32 @@ public class User implements BaseEntity, UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ToString.Include
+    @Column(name = "id")
     private Long id;
 
     @ToString.Include
+    @Column(name = "first_name")
     private String firstName;
 
     @ToString.Include
+    @Column(name = "last_name")
     private String lastName;
 
     @Email
-    @Column(unique = true)
     @ToString.Include
     @EqualsAndHashCode.Include
+    @Column(name = "email", unique = true)
     private String email;
 
+    @Column(name = "password_digest")
     private String passwordDigest;
 
     @CreatedDate
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "assignee", cascade = CascadeType.MERGE)

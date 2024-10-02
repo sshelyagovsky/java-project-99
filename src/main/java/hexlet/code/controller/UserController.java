@@ -7,9 +7,10 @@ import hexlet.code.service.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,10 +27,13 @@ import java.util.List;
 @RequestMapping(path = "/api")
 @SecurityRequirement(name = "bearerAuth")
 @Tag(name = "users-controller")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    private static final String ONLY_OWNER_BY_ID
+            = "@userRepository.findById(#id).get().getEmail() == authentication.getName()";
 
     @GetMapping(path = "/users")
     @ResponseStatus(HttpStatus.OK)
@@ -55,12 +59,14 @@ public class UserController {
 
     @PutMapping(path = "/users/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize(ONLY_OWNER_BY_ID)
     public UserDTO update(@Valid @RequestBody UserUpdateDTO userData, @PathVariable Long id) {
         return userService.update(userData, id);
     }
 
     @DeleteMapping(path = "/users/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize(ONLY_OWNER_BY_ID)
     public void destroy(@PathVariable Long id) {
         userService.delete(id);
     }

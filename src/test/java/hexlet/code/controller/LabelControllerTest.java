@@ -2,7 +2,6 @@ package hexlet.code.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hexlet.code.mapper.LabelMapper;
 import hexlet.code.model.Label;
 import hexlet.code.repository.LabelRepository;
 import hexlet.code.util.ModelGenerator;
@@ -36,9 +35,6 @@ public class LabelControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private LabelMapper labelMapper;
 
     @Autowired
     private LabelRepository labelRepository;

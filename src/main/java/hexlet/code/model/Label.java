@@ -29,16 +29,16 @@ public class Label implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Long id;
 
-    @Column(unique = true)
+    @Column(name = "name", unique = true)
     private String name;
 
     @ManyToMany(mappedBy = "labels", cascade = CascadeType.MERGE)
     private Set<Task> tasks;
 
     @CreatedDate
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-
-
 }

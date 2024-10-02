@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
         componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy =  ReportingPolicy.IGNORE
 )
-
 public abstract class TaskMapper {
 
     @Autowired
